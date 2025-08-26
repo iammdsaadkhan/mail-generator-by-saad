@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mail Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      background: #f4f6f9;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      font-weight: bold;
+      margin-top: 10px;
+      display: block;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin: 5px 0 15px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 8px;
+      background: #007bff;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    .output-box {
+      background: #f1f1f1;
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 15px;
+    }
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .row span {
+      flex: 1;
+      font-family: monospace;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Mail & Password Generator</h2>
+
+    <label for="formNo">Form Number:</label>
+    <input type="number" id="formNo" placeholder="Enter Form Number">
+
+    <label for="fullName">Full Name:</label>
+    <input type="text" id="fullName" placeholder="Enter Full Name">
+
+    <button onclick="generate()">Generate</button>
+
+    <div id="output" class="output-box" style="display:none;">
+      <div class="row">
+        <span id="mailText"></span>
+        <button onclick="copyMail()">Copy Mail</button>
+      </div>
+      <div class="row">
+        <span id="passText"></span>
+        <button onclick="copyPassword()">Copy Password</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let mail = "", password = "";
+
+    function capitalizeWords(str) {
+      return str.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+    }
+
+    function generate() {
+      let formNo = document.getElementById("formNo").value.trim();
+      let fullName = document.getElementById("fullName").value.trim();
+
+      if (!formNo || !fullName) {
+        alert("Please enter both Form Number and Full Name.");
+        return;
+      }
+
+      // Capitalize each word
+      let formattedName = capitalizeWords(fullName);
+
+      // Replace spaces with underscores for email
+      let emailName = formattedName.replace(/\s+/g, "_");
+
+      // Generate email
+      mail = `${formNo}_${emailName}@rediffmail.com`;
+
+      // First word only for password
+      let firstName = formattedName.split(" ")[0];
+      password = `${firstName}_sparks_123@`;
+
+      // Show result
+      document.getElementById("mailText").innerText = "Mail: " + mail;
+      document.getElementById("passText").innerText = "Password: " + password;
+      document.getElementById("output").style.display = "block";
+    }
+
+    function copyMail() {
+      if (!mail) {
+        alert("No mail generated yet!");
+        return;
+      }
+      navigator.clipboard.writeText(mail).then(() => {
+        alert("Mail copied to clipboard!");
+      });
+    }
+
+    function copyPassword() {
+      if (!password) {
+        alert("No password generated yet!");
+        return;
+      }
+      navigator.clipboard.writeText(password).then(() => {
+        alert("Password copied to clipboard!");
+      });
+    }
+  </script>
+</body>
+</html>
