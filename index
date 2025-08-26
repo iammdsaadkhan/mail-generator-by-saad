@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mail Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url("background.jpg"); /* put your image in repo */
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+    .container {
+      max-width: 500px;
+      margin: 50px auto;
+      background: rgba(255, 255, 255, 0.9); /* transparent white box */
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+    h2 { text-align: center; color: #333; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Mail & Password Generator</h2>
+    <!-- Your form goes here -->
+  </div>
+</body>
+</html>
