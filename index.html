@@ -100,8 +100,17 @@
       let formNo = document.getElementById("formNo").value.trim();
       let fullName = document.getElementById("fullName").value.trim();
 
-      if (!formNo || !fullName) {
+      if (!formNo && !fullName) {
         alert("Dono likh BDSK");
+        return;
+      }
+      
+      if (!formNo) {
+        alert("Form Number Aapke Abbu Aake Likhnege!");
+        return;
+      }
+      if (!fullName) {
+        alert("Name Aapke Abbu Aake Likhnege!");
         return;
       }
 
